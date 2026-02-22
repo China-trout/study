@@ -1,30 +1,7 @@
-# study
+# 蓝牙键鼠
 
-## 说明 / Description
-这是 China-trout 的学习/实验仓库，用于记录笔记、演示示例代码与练习项目。
-This is China-trout's learning/experimental repository for notes, example demos, and practice projects.
+## 说明
+这是基于蓝牙HID协议从而将安卓手机模拟成蓝牙键盘，鼠标以及手柄
 
-## 功能 / Features
-- 项目/笔记 A：简要说明 / Project/Note A: brief description
-- 项目/笔记 B：简要说明 / Project/Note B: brief description
-
-## 快速开始 / Quick Start
-1. 克隆仓库：
-   git clone https://github.com/China-trout/study.git
-2. 进入目录并按照各子项目说明运行 / Enter the directory and follow each subproject's README to run
-
-## 目录结构 / Repository Structure
-- /project-a — 演示项目 A / demo project A
-- /notes — 学习笔记 / study notes
-
-## 贡献 / Contributing
+## 贡献
 欢迎提交 issues 或 PR。请在 PR 描述中说明变更内容与测试方法。
-Contributions are welcome via issues or pull requests. Please describe changes and how you tested them in the PR.
-
-## 许可证 / License
-根据需要填写许可证（例如 MIT）。
-Add a license as needed (e.g., MIT).
-
-## 联系 / Contact
-作者：China-trout
-Author: China-trout
