@@ -1,0 +1,15 @@
+{
+  "name": "bluetooth-hid",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module"
+  }
+}

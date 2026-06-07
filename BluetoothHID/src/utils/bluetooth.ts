@@ -113,7 +113,7 @@ export class BluetoothManager {
     // 这里实际实现会通过蓝牙HID发送报告
   }
 
-  // 发送手柄报告
+  // 发送游戏手柄报告
   async sendGamepadReport(report: GamepadReport): Promise<void> {
     if (!this.connectedDevice) {
       throw new Error('No device connected');
