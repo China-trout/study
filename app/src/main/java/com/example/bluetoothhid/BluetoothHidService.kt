@@ -4,6 +4,8 @@ import android.app.Service
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothHidDevice
+import android.bluetooth.BluetoothHidDeviceAppQosSettings
+import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
@@ -111,33 +113,42 @@ class BluetoothHidService : Service() {
             listener?.onError("代理未就绪")
             return
         }
-        val sdp = BluetoothHidDeviceAppSdpRecord(
+        val sdp = BluetoothHidDeviceAppSdpSettings(
             "BluetoothHid",          // name
             "Android HID Keyboard/Mouse/Gamepad", // description
             "BluetoothHidProvider",  // provider
-            BluetoothHidDevice.SUBCLASS1_KEYBOARD.toByte().toInt(),
+            BluetoothHidDevice.SUBCLASS1_COMBO, // subclass（复合设备）
             HidDescriptors.COMPOSITE
         )
         val qos = BluetoothHidDeviceAppQosSettings(
-            BluetoothHidDevice.SERVICE_PRIORITY_HIGH,
+            BluetoothHidDeviceAppQosSettings.SERVICE_BEST_EFFORT,
             800,  // token rate
             9,    // token bucket size
             11250,// peak bandwidth
             11250,// latency
             11250 // delay variation
         )
-        val ok = hd.registerApp(sdp, null, qos, mainExecutor) { device, state ->
-            // 连接状态回调
-            hostDevice = device
-            connectionState = state
-            Log.i(TAG, "连接状态变更: ${device?.address} -> $state")
-            listener?.onConnectionStateChanged(device, state)
-        }
+        val ok = hd.registerApp(sdp, null, qos, mainExecutor,
+            object : BluetoothHidDevice.Callback() {
+                override fun onConnectionStateChanged(device: BluetoothDevice, state: Int) {
+                    // 连接状态回调
+                    hostDevice = device
+                    connectionState = state
+                    Log.i(TAG, "连接状态变更: ${device?.address} -> $state")
+                    listener?.onConnectionStateChanged(device, state)
+                }
+
+                override fun onAppStatusChanged(device: BluetoothDevice, isRegistered: Boolean) {
+                    Log.i(TAG, "App 状态变更: registered=$isRegistered")
+                    if (isRegistered) listener?.onAppRegistered()
+                }
+            }
+        )
         if (!ok) {
             listener?.onError("registerApp 失败")
         } else {
             appRegistered = true
-            listener?.onAppRegistered()
+            // onAppRegistered 由 onAppStatusChanged 回调触发
         }
     }
 

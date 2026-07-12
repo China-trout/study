@@ -13,7 +13,7 @@ package com.example.bluetoothhid
 object HidDescriptors {
 
     /** 复合设备描述符：键盘 + 鼠标 + 手柄 */
-    val COMPOSITE: ByteArray = byteArrayOf(
+    val COMPOSITE: ByteArray = intArrayOf(
         // 0x05, 0x01        Usage Page (Generic Desktop Ctrls)
         0x05, 0x01,
         // 0x09, 0x00        Usage (Undefined) -> 用作应用集合根
@@ -117,7 +117,7 @@ object HidDescriptors {
         // 0x09, 0x31        Usage (Y)
         0x09, 0x31,
         // 0x15, 0x81        Logical Minimum (-127)
-        0x15, 0x81.toByte(),
+        0x15, 0x81,
         // 0x25, 0x7F        Logical Maximum (127)
         0x25, 0x7F,
         // 0x75, 0x08        Report Size (8)
@@ -189,7 +189,7 @@ object HidDescriptors {
         // 0x09, 0x31        Usage (Y)
         0x09, 0x31,
         // 0x15, 0x81        Logical Minimum (-127)
-        0x15, 0x81.toByte(),
+        0x15, 0x81,
         // 0x25, 0x7F        Logical Maximum (127)
         0x25, 0x7F,
         // 0x75, 0x08        Report Size (8)
@@ -204,7 +204,7 @@ object HidDescriptors {
 
         // 0xC0              End Collection (Application root)
         0xC0
-    )
+    ).map { it.toByte() }.toByteArray()
 
     /** 键盘修饰键位掩码 */
     object KeyboardModifier {
