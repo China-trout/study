@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="black">#FF000000</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="white">#FFFFFFFF</color>
-    <string name="app_name">蓝牙键鼠</string>
-    <style name="Theme.BluetoothHid" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
-</resources>
